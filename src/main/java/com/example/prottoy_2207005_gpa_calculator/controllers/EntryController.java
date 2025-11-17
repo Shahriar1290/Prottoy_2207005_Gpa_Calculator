@@ -33,6 +33,7 @@ public class EntryController {
     @FXML private TableColumn<Course, String> colGrade;
 
     @FXML private Button calculateButton;
+    @FXML private Button addCourseButton;
 
     private ObservableList<Course> courseList = FXCollections.observableArrayList();
     private int totalCredits = 18; // Example, you can make it dynamic
@@ -74,7 +75,10 @@ public class EntryController {
                 return;
             }
 
-
+            if (currentCredits + credit > totalCredits) {
+                showAlert("Adding this course exceeds total allowed credits!");
+                return;
+            }
 
             Course c = new Course(name, code, credit, t1, t2, grade);
             courseList.add(c);
@@ -91,6 +95,7 @@ public class EntryController {
 
             calculateButton.setDisable(currentCredits != totalCredits);
 
+            addCourseButton.setDisable(currentCredits >= totalCredits);
 
 
         } catch (NumberFormatException e) {
