@@ -16,11 +16,10 @@ public class HomeController {
     @FXML
     private void startGPA(ActionEvent event) {
         try {
-            // Load entry scene
+            DatabaseHelper.createTable();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prottoy_2207005_gpa_calculator/Entry.fxml"));
             Parent root = loader.load();
 
-            // Get current stage
             Stage stage = (Stage) startButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("GPA Entry");
