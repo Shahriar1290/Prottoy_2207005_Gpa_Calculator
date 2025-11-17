@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="472.0" prefWidth="603.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+
+    <children>
+        <VBox alignment="CENTER" spacing="20" style="-fx-background-color: #78c1c1;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+            <padding>
+                <Insets bottom="40" left="40" right="40" top="40" />
+            </padding>
+
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Welcome to GPA Calculator" />
+
+            <Label style="-fx-font-size: 16px;" text="Calculate your GPA" />
+
+            <Button fx:id="startButton" onAction="#startGPA" style="-fx-font-size: 18px; -fx-padding: 10 20;" text="Start GPA Calculator" />
+        </VBox>
+    </children>
+</AnchorPane>
