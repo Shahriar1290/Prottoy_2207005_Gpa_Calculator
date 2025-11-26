@@ -23,10 +23,8 @@
                 <Insets bottom="20" left="30" right="30" top="30" />
             </padding>
 
-            <!-- Title -->
             <Label style="-fx-font-size: 26px; -fx-font-weight: bold;" text="GPA Result Sheet" />
 
-            <!-- Result Table -->
             <TableView fx:id="resultTable" prefHeight="300" prefWidth="600" style="-fx-background-color: #78c1c1;">
                 <columns>
                     <TableColumn fx:id="rName" prefWidth="150" text="Course Name" />
@@ -38,13 +36,12 @@
                 </columns>
             </TableView>
 
-            <!-- GPA Display -->
             <HBox alignment="CENTER" spacing="10">
                 <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Calculated GPA:" />
                 <Label fx:id="gpaLabel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: darkblue;" />
             </HBox>
 
-            <!-- Back Button -->
+
             <Button onAction="#backHome" style="-fx-font-size: 18px; -fx-padding: 10 20;" text="Back to Home" />
 
         </VBox>

@@ -1,7 +1,6 @@
 package com.example.prottoy_2207005_gpa_calculator.controllers;
 
 import com.example.prottoy_2207005_gpa_calculator.models.Course;
-import com.sun.javafx.menu.MenuItemBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -108,7 +107,10 @@ public class EntryController {
     @FXML
     private void calculateGPA() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/prottoy_2207005_gpa_calculator/Result.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com.example.prottoy_2207005_gpa_calculator/DataBaseTable.fxml")
+            );
+
             Parent root = loader.load();
 
             ResultController controller = loader.getController();
