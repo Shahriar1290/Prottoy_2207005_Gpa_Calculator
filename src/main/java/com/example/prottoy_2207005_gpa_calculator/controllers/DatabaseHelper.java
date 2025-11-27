@@ -14,7 +14,6 @@ public class DatabaseHelper {
         return DriverManager.getConnection(URL);
     }
 
-
     public static void createTable() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS course (
@@ -26,7 +25,6 @@ public class DatabaseHelper {
                     grade TEXT
                 );
                 """;
-
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
@@ -35,10 +33,8 @@ public class DatabaseHelper {
         }
     }
 
-
     public static void insertCourse(Course course) {
-        String sql = "INSERT INTO course(code, name, credit, teacher1, teacher2, grade) VALUES(?,?,?,?,?,?)";
-
+        String sql = "INSERT OR REPLACE INTO course(code, name, credit, teacher1, teacher2, grade) VALUES(?,?,?,?,?,?)";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -48,20 +44,14 @@ public class DatabaseHelper {
             pstmt.setString(4, course.getTeacher1());
             pstmt.setString(5, course.getTeacher2());
             pstmt.setString(6, course.getGrade());
-
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
     public static void updateCourse(Course course) {
-        String sql = """
-                UPDATE course SET name=?, credit=?, teacher1=?, teacher2=?, grade=?
-                WHERE code=?
-                """;
-
+        String sql = "UPDATE course SET name=?, credit=?, teacher1=?, teacher2=?, grade=? WHERE code=?";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -71,27 +61,23 @@ public class DatabaseHelper {
             pstmt.setString(4, course.getTeacher2());
             pstmt.setString(5, course.getGrade());
             pstmt.setString(6, course.getCode());
-
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
-    public static void deleteCourse(Course course) {
+    public static void deleteCourse(String code) {
         String sql = "DELETE FROM course WHERE code=?";
-
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, course.getCode());
+            pstmt.setString(1, code);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
     public static ObservableList<Course> fetchAllCourses() {
         ObservableList<Course> list = FXCollections.observableArrayList();
@@ -116,7 +102,20 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return list;
+    }
+
+    public static boolean courseExists(String code) {
+        String sql = "SELECT 1 FROM course WHERE code=? LIMIT 1";
+        try (Connection conn = connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, code);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

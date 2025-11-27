@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -35,7 +34,7 @@ public class EntryController {
     @FXML private Button addCourseButton;
 
     private ObservableList<Course> courseList = FXCollections.observableArrayList();
-    private int totalCredits = 18; // Example, you can make it dynamic
+    private int totalCredits = 18; // you can make it dynamic later
     private int currentCredits = 0;
 
     @FXML
@@ -57,6 +56,8 @@ public class EntryController {
         currentCreditLabel.setText(String.valueOf(currentCredits));
 
         calculateButton.setDisable(true);
+
+        DatabaseHelper.createTable();
     }
 
     @FXML
@@ -79,8 +80,10 @@ public class EntryController {
                 return;
             }
 
-            Course c = new Course(name, code, credit, t1, t2, grade);
+            Course c = new Course(code, name, credit, t1, t2, grade);
+
             courseList.add(c);
+            DatabaseHelper.insertCourse(c);
 
             currentCredits += credit;
             currentCreditLabel.setText(String.valueOf(currentCredits));
@@ -93,35 +96,33 @@ public class EntryController {
             gradeCombo.setValue(null);
 
             calculateButton.setDisable(currentCredits != totalCredits);
-
             addCourseButton.setDisable(currentCredits >= totalCredits);
-
 
         } catch (NumberFormatException e) {
             showAlert("Invalid credit value!");
         }
     }
 
-
-
     @FXML
     private void calculateGPA() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com.example.prottoy_2207005_gpa_calculator/DataBaseTable.fxml")
+                    getClass().getResource("/com/example/prottoy_2207005_gpa_calculator/DatabaseTable.fxml")
             );
 
             Parent root = loader.load();
 
-            ResultController controller = loader.getController();
+            DatabaseTableController controller = loader.getController();
             controller.setCourseList(courseList);
+            controller.refreshTable();
 
             Stage stage = (Stage) calculateButton.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("GPA Result");
+            stage.setTitle("Database / GPA");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert("Failed to open Database view: " + e.getMessage());
         }
     }
 

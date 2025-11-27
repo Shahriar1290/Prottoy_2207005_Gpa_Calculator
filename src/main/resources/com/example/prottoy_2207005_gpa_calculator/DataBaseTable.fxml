@@ -7,10 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500" prefWidth="736.0"
-            xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.prottoy_2207005_gpa_calculator.controllers.DatabaseTableController">
+<AnchorPane prefHeight="500" prefWidth="736.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prottoy_2207005_gpa_calculator.controllers.DatabaseTableController">
 
 
 
@@ -31,8 +28,10 @@
            <HBox spacing="15" style="-fx-alignment: center;">
                <Button fx:id="addButton" onAction="#addCourse" style="-fx-font-size: 16px; -fx-padding: 5 20;" text="Add" />
                <Button fx:id="updateButton" onAction="#updateCourse" style="-fx-font-size: 16px; -fx-padding: 5 20;" text="Update" />
-               <Button fx:id="deleteButton" onAction="#deleteClicked" style="-fx-font-size: 16px; -fx-padding: 5 20;" text="Delete" />
-          </HBox>
+               <Button fx:id="deleteButton" onAction="#deleteCourse" style="-fx-font-size: 16px; -fx-padding: 5 20;" text="Delete" />
+               <Button onAction="#calculateGPA" prefHeight="38.0" prefWidth="90.0" text="Calculate GPA" />
+
+           </HBox>
 
         </VBox>
     </children>

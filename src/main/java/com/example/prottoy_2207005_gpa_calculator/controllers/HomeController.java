@@ -10,8 +10,7 @@ import javafx.stage.Stage;
 
 public class HomeController {
 
-    @FXML
-    private Button startButton;
+    @FXML private Button startButton;
 
     @FXML
     private void startGPA(ActionEvent event) {
