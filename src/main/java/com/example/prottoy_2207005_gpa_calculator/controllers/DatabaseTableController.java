@@ -1,6 +1,5 @@
 package com.example.prottoy_2207005_gpa_calculator.controllers;
 
-
 import com.example.prottoy_2207005_gpa_calculator.models.Course;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
